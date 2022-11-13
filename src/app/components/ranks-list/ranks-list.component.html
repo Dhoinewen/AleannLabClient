@@ -1,0 +1,14 @@
+<div class="list">
+  <div class="list-item" *ngFor="let rank of ranks$ | async">
+    <h2>
+      Name: {{rank.rank_name | titlecase}}
+    </h2>
+    <p>
+      Rank ID: {{rank.id}}
+    </p>
+    <p>
+      Rank Queue: {{rank.queue}}
+    </p>
+    <button mat-raised-button color="accent" routerLink="../ranks/{{rank.id}}">Detail</button>
+  </div>
+</div>

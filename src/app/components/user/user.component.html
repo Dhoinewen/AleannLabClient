@@ -1,0 +1,40 @@
+<div *ngIf="loading">
+  <h2>Loading...</h2>
+</div>
+
+<div *ngIf="!loading">
+
+  <div>
+    <h2>{{user.name | titlecase}}</h2>
+    <p>User ID: {{user.id}}</p>
+  </div>
+  <div class="rank_info">
+    <p>Rank ID: {{ranksDetail.id}}</p>
+    <p>Rank name: {{ranksDetail.rank_name | titlecase}}</p>
+    <p>Rank Queue: {{ranksDetail.queue}}</p>
+  </div>
+  <button mat-raised-button color="accent" (click)="deleteUser()">Delete User</button>
+  <form>
+    <mat-form-field appearance="fill">
+      <mat-label>Select queue</mat-label>
+      <mat-select [formControl]="newRank">
+        <mat-option *ngFor="let rank of ranks$ | async" [value]="rank">
+          {{rank.queue}} {{rank.rank_name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </form>
+  <button (click)="changeQueue()" mat-raised-button color="accent" [disabled]="newRank.value == null">Update Data
+  </button>
+
+  <form>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>New name</mat-label>
+      <input [formControl]="newName" matInput placeholder="Name">
+    </mat-form-field>
+    <div>
+      <button (click)="changeName()" mat-raised-button color="accent">Update name</button>
+    </div>
+  </form>
+</div>

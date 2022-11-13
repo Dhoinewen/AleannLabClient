@@ -1,0 +1,24 @@
+<div *ngIf="loading">
+  <h2>Loading...</h2>
+</div>
+
+
+<div *ngIf="!loading">
+  <h2>{{rank.rank_name | titlecase}}</h2>
+  <p>User ID: {{rank.id}}</p>
+  <p>Queue: {{rank.queue}}</p>
+</div>
+
+<form>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>New name</mat-label>
+    <input [formControl]="newName" matInput placeholder="Name">
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>New Queue</mat-label>
+    <input [formControl]="newQueue" matInput placeholder="Name">
+  </mat-form-field>
+  <div>
+    <button (click)="changeName()" mat-raised-button color="accent">Update</button>
+  </div>
+</form>

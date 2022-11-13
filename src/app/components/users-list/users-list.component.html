@@ -1,0 +1,49 @@
+
+<div class="go-to-ranks">
+  <button mat-raised-button color="accent" routerLink="../ranks">Go to ranks</button>
+</div>
+
+<div class="sort-type">
+  <mat-button-toggle-group [formControl]="sortType" name="fontStyle" aria-label="Font Style">
+    <mat-button-toggle value="">No Sort</mat-button-toggle>
+    <mat-button-toggle value="asc">Asc</mat-button-toggle>
+    <mat-button-toggle value="desc">Desc</mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
+
+
+<div class="list">
+  <div class="list-item" *ngFor="let user of users$ | async">
+    <h2>
+      Name: {{user.name | titlecase}}
+    </h2>
+    <p>
+      Queue: {{getQuery(user.rank)}}
+    </p>
+    <button mat-raised-button color="accent" routerLink="../users/{{user.id}}">Detail</button>
+  </div>
+</div>
+
+<div class="create-new">
+  <h2>Create new user</h2>
+  <form [formGroup]="newUserData">
+    <div>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Name</mat-label>
+        <input formControlName="name" matInput placeholder="Name">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Select queue</mat-label>
+        <mat-select formControlName="rankID">
+          <mat-option *ngFor="let rank of ranks$ | async" [value]="rank.id">
+            {{rank.queue}} {{rank.rank_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="accent" (click)="addNewUser()">Add new User</button>
+  </form>
+</div>
+
